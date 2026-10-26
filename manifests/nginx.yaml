@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: argocd-demo
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: argocd-nginx
+  namespace: argocd-demo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: argocd-nginx
+  template:
+    metadata:
+      labels:
+        app: argocd-nginx
+    spec:
+      containers:
+        - name: nginx
+          image: nginx:stable
+          ports:
+            - containerPort: 80
